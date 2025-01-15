@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.lookatfr3sn0.sunny;
 
 import com.getcapacitor.BridgeActivity;
 
