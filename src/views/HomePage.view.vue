@@ -2,9 +2,12 @@
 import { ref, watch } from 'vue';
 import { IonContent, IonPage, IonButton, IonList } from '@ionic/vue';
 import { Geolocation } from '@capacitor/geolocation';
+import { StatusBar } from '@capacitor/status-bar';
 import getTimeHours from '@/helpers/getTimeHours.helper';
 import getTimeDay from '@/helpers/getTimeDay.helper';
 import getIcon from '@/helpers/getIcon.helper';
+
+StatusBar.setOverlaysWebView({ overlay: true });
 
 const weather = ref({});
 const siUnits = ref(true);
@@ -1557,7 +1560,7 @@ loading.value = false;
       <!--! Debug -->
 
       <div v-if="!loading" class="h-screen w-screen p-4">
-        
+
         <div class="flex flex-col text-center">
           <div class="flex flex-col justify-center">
             <span class="text-4xl">{{ city }}</span>

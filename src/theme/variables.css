@@ -16,6 +16,9 @@ http://ionicframework.com/docs/theming/ */
     padding: 0;
     user-select: none;
   }
+  body {
+    margin-top: 30px; 
+  }
 }
 
 @layer components {
