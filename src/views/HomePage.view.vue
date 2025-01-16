@@ -1491,6 +1491,7 @@ const getAddress = async () => {
   address.value = data.features[0].properties.street + ', ' + data.features[0].properties.housenumber;
   city.value = data.features[0].properties.locality;
 };
+
 const getForecast = async () => {
   if (currentLocation.value.latitude === 0 && currentLocation.value.longitude === 0) {
     console.error('No location data');
@@ -1541,6 +1542,7 @@ try {
 } catch (error) {
   console.error('Error getting location', error);
 }
+
 // getAddress();
 getForecast();
 loading.value = false;
@@ -1551,7 +1553,7 @@ loading.value = false;
   <ion-page>
     <ion-content :fullscreen="true">
       <!--! Debug -->
-      <div class="absolute right-0 flex flex-col text-xs w-32 gap-1">
+      <div class="absolute right-0 top-4 flex flex-col text-xs w-32 gap-1">
         <span>{{ currentLocation.latitude }}, {{currentLocation.longitude}}</span>
         <ion-button mode="ios" :disabled="loading" size="small" @click="getAddress">Get address</ion-button>
         <ion-button mode="ios" :disabled="loading" size="small" @click="getForecast">Get forecast</ion-button>
@@ -1572,9 +1574,7 @@ loading.value = false;
               <span class="text-2xl">{{ weather.currently.summary }}</span>
             </div>
             <div class="text-6xl">
-              <div v-if="roundedTemperature" class="degrees">
-                {{ weather.currently.temperature.toFixed(0) }}
-              </div>
+              <div v-if="roundedTemperature" class="degrees">{{ weather.currently.temperature.toFixed(0) }}</div>
               <div v-else class="degrees">
                 <span>{{ weather.currently.temperature.toFixed(1).split('.')[0] }}</span>
                 <span class="text-2xl">{{ '.' + weather.currently.temperature.toFixed(1).split('.')[1] }}</span>
@@ -1594,8 +1594,8 @@ loading.value = false;
               <span class="min-w-max text-sm">{{ getTimeHours(weather.hourly[i].time) }}</span>
             </div>
           </div>
+          
           <span class="self-start ml-4 mb-1 text-sm">Next 7 days</span>
-
           <ion-list class="w-auto flex flex-col p-2 gap-4 bg-[#00000010] dark:bg-[#FFFFFF10] rounded-xl">
             <div v-for="i in 7" class="flex place-items-center gap-4 px-4">
               <span class="">{{ getTimeDay(weather.daily.data[i].time).slice(0,3) }}</span>
