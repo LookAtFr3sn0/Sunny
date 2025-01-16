@@ -1556,7 +1556,6 @@ loading.value = false;
       <div class="absolute right-0 top-4 flex flex-col text-xs w-32 gap-1">
         <span>{{ currentLocation.latitude }}, {{currentLocation.longitude}}</span>
         <ion-button mode="ios" :disabled="loading" size="small" @click="getAddress">Get address</ion-button>
-        <ion-button mode="ios" :disabled="loading" size="small" @click="getForecast">Get forecast</ion-button>
         <ion-button mode="ios" :disabled="loading" size="small" @click="roundedTemperature = !roundedTemperature">Toggle rounding</ion-button>
       </div>
       <!--! Debug -->
@@ -1569,24 +1568,46 @@ loading.value = false;
             <span class="text-sm">{{ address }}</span>
           </div>
           <div class="flex flex-col my-12 gap-4">
+
             <div class="flex justify-center gap-0.5">
               <span class="material-symbols-outlined text-2xl">{{ getIcon(weather.currently.icon) }}</span>
               <span class="text-2xl">{{ weather.currently.summary }}</span>
             </div>
+            
             <div class="text-6xl">
-              <div v-if="roundedTemperature" class="degrees">{{ weather.currently.temperature.toFixed(0) }}</div>
+              <div v-if="roundedTemperature" class="degrees">{{ Math.round(weather.currently.temperature) }}</div>
+              
               <div v-else class="degrees">
                 <span>{{ weather.currently.temperature.toFixed(1).split('.')[0] }}</span>
                 <span class="text-2xl">{{ '.' + weather.currently.temperature.toFixed(1).split('.')[1] }}</span>
               </div>
+              <div class="text-2xl">
+                <div class="flex justify-center gap-4" v-if="roundedTemperature">
+                  <div class="degrees">{{ Math.round(weather.daily.data[0].temperatureMin) }}</div>
+                  <div class="degrees">{{ Math.round(weather.daily.data[0].temperatureMax) }}</div>
+                </div>
+                
+                <div class="flex justify-center gap-4" v-else>
+                  <div class="degrees">
+                    <span>{{ weather.daily.data[0].temperatureMin.toFixed(1).split('.')[0] }}</span>
+                    <span>{{ '.' + weather.daily.data[0].temperatureMin.toFixed(1).split('.')[1] }}</span>
+                  </div>
+
+                  <div class="degrees">
+                    <span>{{ weather.daily.data[0].temperatureMax.toFixed(1).split('.')[0] }}</span>
+                    <span>{{ '.' + weather.daily.data[0].temperatureMax.toFixed(1).split('.')[1] }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
 
           <span class="self-start ml-4 mb-1 text-sm">Next 12 hours</span>
           <div class="w-auto flex place-items-center p-2 gap-4 mb-12 bg-[#00000010] dark:bg-[#FFFFFF10] rounded-xl overflow-x-auto">
             <div v-for="i in 12" class="flex flex-col gap-0.5 place-items-center justify-center px-4 h-full">
               <span class="material-symbols-outlined text-4xl mb-2 ">{{ getIcon(weather.hourly[i].icon) }}</span>
-              <div v-if="roundedTemperature" class="degrees text-lg">{{weather.hourly[i].temperature.toFixed(0)}}</div>
+              <div v-if="roundedTemperature" class="degrees text-lg">{{ Math.round(weather.hourly[i].temperature) }}</div>
               <div v-else class="degrees">
                 <span class="text-lg">{{weather.hourly[i].temperature.toFixed(1).split('.')[0]}}</span>
                 <span class="text-sm">{{'.' + weather.hourly[i].temperature.toFixed(1).split('.')[1]}}</span>
@@ -1604,8 +1625,8 @@ loading.value = false;
                 <span class="text-lg">{{ weather.daily.data[i].summary }}</span>
               </div>
               <div class="flex flex-col gap-0.5" v-if="roundedTemperature">
-                <div class="degrees">{{ weather.daily.data[i].temperatureMax.toFixed(0) }}</div>
-                <div class="degrees">{{ weather.daily.data[i].temperatureMin.toFixed(0) }}</div>
+                <div class="degrees">{{ Math.round(weather.daily.data[i].temperatureMax) }}</div>
+                <div class="degrees">{{ Math.round(weather.daily.data[i].temperatureMin) }}</div>
               </div>
               <div class="flex flex-col gap-0.5" v-else>
                 <div class="degrees">
