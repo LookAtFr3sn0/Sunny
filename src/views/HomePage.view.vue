@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import { IonContent, IonPage, IonButton, IonList } from '@ionic/vue';
 import { Geolocation } from '@capacitor/geolocation';
 import { StatusBar } from '@capacitor/status-bar';
@@ -1456,6 +1457,7 @@ const response = {
     "version": "V2.4.2"
   }
 }
+const router = useRouter();
 // Development only
 
 // const currentLocation = ref(null);
@@ -1543,15 +1545,25 @@ try {
   console.error('Error getting location', error);
 }
 
-// getAddress();
-getForecast();
-loading.value = false;
+function setup() {
+  if (localStorage.length === 0) {
+    // redirect to /setup
+    router.push('/setup');
+  }
+  else {
+    // getAddress();
+    getForecast();
+    loading.value = false;
+  }
+}
+
+setup();
 
 </script>
 
 <template>
   <ion-page>
-    <ion-content :fullscreen="true">
+    <ion-content :fullscreen="true" class="h-screen w-screen p-40">
       <!--! Debug -->
       <div class="absolute right-0 top-4 flex flex-col text-xs w-32 gap-1">
         <span>{{ currentLocation.latitude }}, {{currentLocation.longitude}}</span>
@@ -1560,7 +1572,7 @@ loading.value = false;
       </div>
       <!--! Debug -->
 
-      <div v-if="!loading" class="h-screen w-screen p-4">
+      <div v-if="!loading" class="max-w-screen-lg mx-auto p-4 my-12">
 
         <div class="flex flex-col text-center">
           <div class="flex flex-col justify-center">
@@ -1639,6 +1651,7 @@ loading.value = false;
                 </div>
               </div>
             </div>
+            <div v-for="i in 10">{{ i }}</div>
           </ion-list>
 
         </div>
