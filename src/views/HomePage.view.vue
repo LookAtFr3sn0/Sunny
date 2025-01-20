@@ -1543,15 +1543,19 @@ try {
   console.error('Error getting location', error);
 }
 
-// getAddress();
-getForecast();
-loading.value = false;
+function setup() {
+  // getAddress();
+  getForecast();
+  loading.value = false;
+}
+
+setup();
 
 </script>
 
 <template>
   <ion-page>
-    <ion-content :fullscreen="true">
+    <ion-content :fullscreen="true" class="h-screen w-screen p-40">
       <!--! Debug -->
       <div class="absolute right-0 top-4 flex flex-col text-xs w-32 gap-1">
         <span>{{ currentLocation.latitude }}, {{currentLocation.longitude}}</span>
@@ -1560,7 +1564,7 @@ loading.value = false;
       </div>
       <!--! Debug -->
 
-      <div v-if="!loading" class="h-screen w-screen p-4">
+      <div v-if="!loading" class="max-w-screen-lg mx-auto p-4 my-12">
 
         <div class="flex flex-col text-center">
           <div class="flex flex-col justify-center">
