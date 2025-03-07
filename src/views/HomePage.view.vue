@@ -1564,7 +1564,7 @@ setup();
       </div>
       <!--! Debug -->
 
-      <div v-if="!loading" class="max-w-screen-lg mx-auto p-4 my-12">
+      <div v-if="!loading" class="max-w-screen-sm mx-auto p-4 my-12">
 
         <div class="flex flex-col text-center">
           <div class="flex flex-col justify-center">
