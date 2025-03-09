@@ -5,6 +5,7 @@ import { IonList, IonInput, IonSelect, IonSelectOption } from '@ionic/vue';
 
 const apiName = ref('');
 const apiKey = ref('');
+const roundTemp = ref(true);
 </script>
 
 <template>
@@ -21,6 +22,7 @@ const apiKey = ref('');
             </ion-select>
 
             <ion-input ref="apiKey" type="password" fill="outline" label="API key" label-placement="floating"></ion-input>
+            <ion-toggle class="px-4 py-2" :checked="true" @ionChange="roundTemp = !roundTemp">Round temperature</ion-toggle>
         </ion-list>
     </div>
 </template>
