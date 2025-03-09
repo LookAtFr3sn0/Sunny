@@ -1470,7 +1470,7 @@ const loading = ref(true);
 const error = ref(null);
 
 const getLocation = async () => {
-  let coords;
+  let coords, error;
   try {
     coords = (await Geolocation.getCurrentPosition()).coords;
     currentLocation.value = {
@@ -1478,9 +1478,11 @@ const getLocation = async () => {
       longitude: coords.longitude
     };
   }
-  catch (error) {
-    error.value = error;
+  catch (e) {
+    error = e;
   }
+
+  return { coords, error };
 };
 
 const getAddress = async () => {
@@ -1546,13 +1548,10 @@ try {
   console.error('Error getting location', error);
 }
 
-function setup() {
-  // getAddress();
-  getForecast();
-  loading.value = false;
-}
+// getAddress();
+getForecast();
+loading.value = false;
 
-setup();
 
 </script>
 
