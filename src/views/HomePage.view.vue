@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import { IonContent, IonPage, IonButton, IonList } from '@ionic/vue';
 import { Capacitor } from '@capacitor/core';
 import { Geolocation } from '@capacitor/geolocation';
@@ -1459,6 +1460,7 @@ const response = {
     "version": "V2.4.2"
   }
 }
+const router = useRouter();
 // Development only
 
 // const currentLocation = ref(null);
@@ -1644,6 +1646,7 @@ loading.value = false;
                 </div>
               </div>
             </div>
+            <div v-for="i in 10">{{ i }}</div>
           </ion-list>
 
         </div>
