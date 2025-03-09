@@ -1,13 +1,16 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { IonContent, IonPage, IonButton, IonList } from '@ionic/vue';
+import { Capacitor } from '@capacitor/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { StatusBar } from '@capacitor/status-bar';
 import getTimeHours from '@/helpers/getTimeHours.helper';
 import getTimeDay from '@/helpers/getTimeDay.helper';
 import getIcon from '@/helpers/getIcon.helper';
 
-StatusBar.setOverlaysWebView({ overlay: true });
+if (Capacitor.isNativePlatform()) {
+  StatusBar.setOverlaysWebView({ overlay: true });
+}
 
 const weather = ref({});
 const siUnits = ref(true);
