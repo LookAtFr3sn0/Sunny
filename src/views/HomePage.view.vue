@@ -1467,7 +1467,6 @@ const response = {
 
 const service = import.meta.env.VITE_FORECAST_API;
 const loading = ref(true);
-const error = ref(null);
 
 const getLocation = async () => {
   let coords, error;
@@ -1486,7 +1485,7 @@ const getLocation = async () => {
 };
 
 const getAddress = async () => {
- const url = 'https://api.geocodify.com/v2/reverse?api_key=' + import.meta.env.VITE_GEO_API_KEY + '&lat=' + currentLocation.value.latitude + '&lng=' + currentLocation.value.longitude;
+  const url = 'https://api.geocodify.com/v2/reverse?api_key=' + import.meta.env.VITE_GEO_API_KEY + '&lat=' + currentLocation.value.latitude + '&lng=' + currentLocation.value.longitude;
   const response = await fetch(url);
   const data = (await response.json()).response;
   if (data.error) {
