@@ -1646,7 +1646,6 @@ loading.value = false;
                 </div>
               </div>
             </div>
-            <div v-for="i in 10">{{ i }}</div>
           </ion-list>
 
         </div>
